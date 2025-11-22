@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { PlusCircleIcon, MailIcon, ChevronRight } from "lucide-react";
+import { PlusCircleIcon, MailIcon, ChevronRight, ClipboardCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -163,29 +163,22 @@ export function NavMain({ items }: NavMainProps) {
           <SidebarMenu>
             <SidebarMenuItem className="flex items-center gap-2">
               <SidebarMenuButton
-                tooltip="Quick Create"
+                tooltip="Evaluate"
                 className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
               >
                 <PlusCircleIcon />
-                <span>Quick Create</span>
+                <span>Upload</span>
               </SidebarMenuButton>
-              <Button
-                size="icon"
-                className="h-9 w-9 shrink-0 group-data-[collapsible=icon]:opacity-0"
-                variant="outline"
-              >
-                <MailIcon />
-                <span className="sr-only">Inbox</span>
-              </Button>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroupContent>
       </SidebarGroup>
+      <hr />
       {items.map((group) => (
         <SidebarGroup key={group.id}>
           {group.label && <SidebarGroupLabel>{group.label}</SidebarGroupLabel>}
-          <SidebarGroupContent className="flex flex-col gap-2">
-            <SidebarMenu>
+          <SidebarGroupContent className="flex flex-col gap-2 h-full">
+            <SidebarMenu className="flex justify-between  h-full">
               {group.items.map((item) => {
                 if (state === "collapsed" && !isMobile) {
                   // If no subItems, just render the button as a link
@@ -218,6 +211,22 @@ export function NavMain({ items }: NavMainProps) {
           </SidebarGroupContent>
         </SidebarGroup>
       ))}
+      <hr />
+      <SidebarGroup>
+        <SidebarGroupContent className="flex flex-col gap-2">
+          <SidebarMenu>
+            <SidebarMenuItem className="flex items-center gap-2">
+              <SidebarMenuButton
+                tooltip="Evaluate"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
+              >
+                <ClipboardCheck />
+                <span>Evaluation Results</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
     </>
   );
 }

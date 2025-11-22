@@ -34,12 +34,10 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
+      <hr />
+      <SidebarContent className="flex justify-between mt-18 mb-20">
         <NavMain items={sidebarItems} />
       </SidebarContent>
-      <SidebarFooter>
-        <UserButton />
-      </SidebarFooter>
     </Sidebar>
   );
 };

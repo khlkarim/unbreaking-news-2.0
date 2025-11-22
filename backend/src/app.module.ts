@@ -32,17 +32,11 @@ const infrastructureDatabaseModule = TypeOrmModule.forRootAsync({
   },
 });
 
-import { SprintsModule } from './sprints/sprints.module';
-import { TasksModule } from './tasks/tasks.module';
-import { KpisModule } from './kpis/kpis.module';
 import { ClerkModule } from './clerk/clerk.module';
 import clerkConfig from './clerk/config/clerk.config';
 
 @Module({
   imports: [
-    KpisModule,
-    TasksModule,
-    SprintsModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [

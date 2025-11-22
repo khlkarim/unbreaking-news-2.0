@@ -25,7 +25,7 @@ docker compose up -d postgres adminer maildev
 
 cd backend 
 npm run migration:run
-npm run seed:run
+npm run seed:run:relational
 npm run start:dev
 
 cd ../frontend

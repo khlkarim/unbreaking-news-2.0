@@ -1,17 +1,12 @@
 import {
-  Mail,
-  Calendar,
-  Kanban,
-  ReceiptText,
-  Users,
-  Lock,
-  Fingerprint,
-  LayoutDashboard,
-  Banknote,
-  Gauge,
-  type LucideIcon,
-  Shield,
-  ClipboardList,
+  Upload,
+  Workflow,
+  FileSearch,
+  Settings,
+  ShieldCheck,
+  GitCompare,
+  FileCheck,
+  type LucideIcon
 } from "lucide-react";
 
 export interface NavSubItem {
@@ -42,73 +37,32 @@ export interface NavGroup {
 export const sidebarItems: NavGroup[] = [
   {
     id: 1,
-    label: "Dashboards",
+    label: "Authentification Pipeline",
     items: [
       {
-        title: "Home",
-        url: "/dashboard/default",
-        icon: LayoutDashboard,
+        title: "Metadata Analysis",
+        url: "/dashboard/metadata-analysis",
+        icon: FileSearch,
       },
       {
-        title: "Annual Calendar",
-        url: "/dashboard/annual-calendar",
-        icon: Calendar, // calendar instead of ChartBar
+        title: "Visual Forensics",
+        url: "/dashboard/visual-forensics",
+        icon: Workflow,
       },
       {
-        title: "Finance",
-        url: "/dashboard/finance",
-        icon: Banknote,
-      },
-    ],
-  },
-  {
-    id: 2,
-    label: "Pages",
-    items: [
-      {
-        title: "Sprints",
-        url: "/dashboard/sprints",
-        icon: Kanban, // sprints = board/kanban
+        title: "Preprocessing",
+        url: "/dashboard/preprocessing",
+        icon: Settings,
       },
       {
-        title: "Tasks",
-        url: "/dashboard/tasks",
-        icon: ReceiptText, // tasks/document style
+        title: "Content Integrity",
+        url: "/dashboard/content-integrity",
+        icon: ShieldCheck,
       },
       {
-        title: "KPIs",
-        url: "/dashboard/kpis",
-        icon: Gauge, // gauge = performance metrics
-      },
-      {
-        title: "Reports",
-        url: "/dashboard/reports",
-        icon: ClipboardList,
-      },
-      {
-        title: "Risks",
-        url: "/dashboard/risks",
-        icon: Shield,
-      },
-      {
-        title: "Alumni",
-        url: "/dashboard/alumni",
-        icon: Users, // alumni = group of users
-      },
-      {
-        title: "Notifications",
-        url: "/dashboard/notifications",
-        icon: Mail, // notification = mail/envelope
-      },
-      {
-        title: "Users",
-        url: "/dashboard/users",
-        icon: Users,
-      },
-      {
-        title: "Roles",
-        url: "/dashboard/roles",
-        icon: Lock,
+        title: "Consistency",
+        url: "/dashboard/consistency",
+        icon: FileCheck,
       },
       // {
       //   title: "Authentication",
