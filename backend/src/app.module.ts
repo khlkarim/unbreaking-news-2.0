@@ -34,9 +34,11 @@ const infrastructureDatabaseModule = TypeOrmModule.forRootAsync({
 
 import { ClerkModule } from './clerk/clerk.module';
 import clerkConfig from './clerk/config/clerk.config';
+import { OpencvModule } from './opencv/opencv.module';
 
 @Module({
   imports: [
+    OpencvModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [
