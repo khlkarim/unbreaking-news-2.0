@@ -30,7 +30,7 @@ if "dateRange" in options:
 with ExifToolHelper(executable=exif_path) as et:
     metadata = et.get_metadata(path)
 
-prompt = "Context : We are trying to determine if a file has been tampered with / displays any signs of suspicious behavior using metadata analysis.\n Here is the file's metadata :" + str(metadata) + "\n\nIn a strict JSON format, give me a authenticity score (out of 100%, indexed by \"score\") with 100% being completely authentic and 0% being absolutely forged, as well as short, brief, notes (an array indexed by \"notes\") where you detail why you came up with that answer. Don't forget to consider these constraints when scoring : "
+prompt = "Context : We are trying to determine if a file has been tampered with / displays any signs of suspicious behavior using metadata analysis.\n Here is the file's metadata :" + str(metadata) + "\n\nIn a correct JSON firmat (give ONLY a json object) (raw text, not a code block), give me a authenticity score (out of 100%, indexed by \"score\") with 100% being completely authentic and 0% being absolutely forged, as well as short, brief, notes (an array indexed by \"notes\") where you detail why you came up with that answer. Don't forget to consider these constraints when scoring : "
 prompt += "\n" + ignore_fields
 prompt += "\n" + date_range
 

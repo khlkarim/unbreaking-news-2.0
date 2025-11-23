@@ -84,7 +84,7 @@ def main():
     prompt_evaluate = (
         "Context: We are trying to determine if the following text is historically accurate. "
         "Check reliable, trustworthy sources to assign it an accuracy score (check for bias, inconsistencies, or misinformation). "
-        "In strict JSON format, give me the accuracy score (out of 100%, indexed by 'authenticityScore') with 100% being completely true "
+        "In correct JSON firmat (give ONLY a json object)  (raw text, not a code block), give me the accuracy score (out of 100%, indexed by 'authenticityScore') with 100% being completely true "
         "and 0% being absolutely wrong, as well as short, brief notes (an array indexed by 'notes') detailing why you came up with that answer. "
         f"Here is the content: {transcribed_text}"
     )

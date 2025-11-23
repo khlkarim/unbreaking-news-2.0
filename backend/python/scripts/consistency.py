@@ -28,7 +28,7 @@ image = f"data:{mime_type};base64,{image_b64}"
 with ExifToolHelper(executable=exif_path) as et:
     metadata = et.get_metadata(path)
 
-prompt = "Transcribe this image exactly as it shows, please. Do not alter anything, just print it as is. The result should be in a strict, raw ASCII (don't put them in a code block), JSON format: The content indexed by \"content\" and another field \"success\" which is set to 1 if the transcription was successful and 0 otherwise."
+prompt = "Transcribe this image exactly as it shows, please. Do not alter anything, just print it as is. The result should be in a strict, raw ASCII (don't put them in a code block), JSON format (raw text, not a code block): The content indexed by \"content\" and another field \"success\" which is set to 1 if the transcription was successful and 0 otherwise."
 
 client = Groq()
 completion = client.chat.completions.create(
@@ -48,9 +48,13 @@ completion = client.chat.completions.create(
 )
 
 response_text = completion.choices[0].message.content
-response_json = json.loads(response_text.strip("`")) # type: ignore
 
-prompt2 = "Here is the metadata of the file, along with the text extracted from an image in the file: " + str(metadata) + "\n\nExtracted Text Content:\n" + response_json["content"] + "\n\nIn a strict JSON format, give me a authenticity score (out of 100%, indexed by \"score\") with 100% being completely authentic and 0% being absolutely forged, as well as short, brief, notes (an array indexed by \"notes\") where you detail why you came up with that answer. DON'T fact-check it! Only check the consistency of the information and its consistency with the metadata."
+with open("python/files/output.txt", "w") as f:
+    f.write(response_text)
+
+response_json = json.loads(response_text) # type: ignore
+
+prompt2 = "Here is the metadata of the file, along with the text extracted from an image in the file: " + str(metadata) + "\n\nExtracted Text Content:\n" + response_json["content"] + "\n\nIn a correct JSON firmat (give ONLY a json object) (raw text, not a code block), give me a authenticity score (out of 100%, indexed by \"score\") with 100% being completely authentic and 0% being absolutely forged, as well as short, brief, notes (an array indexed by \"notes\") where you detail why you came up with that answer. DON'T fact-check it! Only check the consistency of the information and its consistency with the metadata."
 
 if "checkDates" in options:
     if options["checkDates"]:
@@ -76,11 +80,5 @@ completion = client.chat.completions.create(
 )
 
 response_text = completion.choices[0].message.content
-
-if response_text and "`" in response_text:    
-    if "json" in response_text: 
-        response_text = response_text[7: -3]
-    else:
-        response_text = response_text[3: -3]
 
 print(response_text)

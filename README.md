@@ -1,10 +1,15 @@
 # **Alethia — Technical Overview**
 
+![](./screenshots/1.png)
+
 ## **General Description**
 
 Alethia is a document authentication platform built by extending two foundational templates—one for the frontend and one for the backend. From these starting points, we designed a full workflow that ingests a document, analyzes it across multiple dimensions, and presents a structured evaluation of its authenticity.
 
 The platform supports **PDF**, **JPG**, and **PNG** formats. After a document is uploaded, it is processed through a configurable **authentication pipeline**. Each pipeline stage evaluates a specific aspect of the document—metadata consistency, visual integrity, text coherence, and other forensics indicators.
+
+![](./screenshots/23.png)
+![](./screenshots/2.png)
 
 Once the pipeline completes, Alethia generates:
 
@@ -12,6 +17,9 @@ Once the pipeline completes, Alethia generates:
 * **Detailed notes** explaining how each score was determined
 * **A radar chart** summarizing the document’s overall authenticity profile
 * **A structured summary** of reasoning and detected issues
+
+![](./screenshots/5.png)
+![](./screenshots/4.png)
 
 ---
 
