@@ -37,7 +37,7 @@ export default function FileUpload05() {
   return (
     <div className="flex items-center justify-center p-10 w-full">
       <form>
-        <h3 className="text-lg font-semibold text-foreground">File Upload</h3>
+        <h3 className="text-4xl font-semibold text-foreground font-heading">File Upload</h3>
 
         <div
           className={cn(
@@ -74,7 +74,7 @@ export default function FileUpload05() {
         </div>
 
         {file && (
-          <div className="relative mt-8 rounded-lg bg-muted p-3">
+          <div className="relative mt-8 rounded-lg p-3 border-1">
             <div className="absolute right-1 top-1">
               <Button
                 type="button"

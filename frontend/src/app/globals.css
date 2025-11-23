@@ -168,3 +168,8 @@ html {
 .disable-transitions * {
   transition: none !important;
 }
+
+/* globals.css */
+.font-heading {
+  font-family: 'Allura', cursive;
+}

@@ -26,7 +26,7 @@ interface Hero1Props {
 const Hero1 = ({
   badge = "✨ Your Third Eye",
   heading = "Alethia",
-  description = "Finely crafted components built with React, Tailwind and Shadcn UI. Developers can copy and paste these blocks directly into their project.",
+  description = "In a landscape crowded with claims and noise, Aletheia stands as a clear, steady lens. It parts the fog of confusion, revealing facts with the quiet precision of light finding its way through morning mist. What was blurred becomes knowable; what was doubtful becomes defined.",
   buttons = {
     primary: {
       text: "Discover all components",
@@ -38,22 +38,22 @@ const Hero1 = ({
     },
   },
   image = {
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-1.svg",
+    src: "assets/logo.png",
     alt: "Hero section demo image showing interface components",
   },
 }: Hero1Props) => {
   return (
     <section className="py-32">
-      <div className="container">
-        <div className="grid items-center gap-8 lg:grid-cols-2">
+      <div className="container h-100 pt-15">
+        <div className="flex items-center gap-8">
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
             {badge && (
-              <Badge variant="outline">
+              <Badge variant="outline" className="font-heading text-xl">
                 {badge}
                 <ArrowUpRight className="ml-2 size-4" />
               </Badge>
             )}
-            <h1 className="my-6 text-pretty text-4xl font-bold lg:text-6xl">
+            <h1 className="font-heading my-6 text-pretty text-8xl font-bold">
               {heading}
             </h1>
             <p className="text-muted-foreground mb-8 max-w-xl lg:text-xl">
@@ -78,7 +78,7 @@ const Hero1 = ({
           <img
             src={image.src}
             alt={image.alt}
-            className="max-h-96 w-full rounded-md object-cover"
+            className="w-xs rounded-full"
           />
         </div>
       </div>

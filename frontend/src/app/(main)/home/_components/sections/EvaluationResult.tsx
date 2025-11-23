@@ -119,7 +119,7 @@ export function EvalutionResult() {
                     </CardHeader>
                     <CardContent>
                         {step.notes.length > 0 ? (
-                        <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                        <ul className="list-disc list-inside text-md space-y-1">
                             {step.notes.map((note: string, idx: number) => (
                             <li key={idx}>{note}</li>
                             ))}
