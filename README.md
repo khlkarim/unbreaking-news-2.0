@@ -1,21 +1,25 @@
 # **Alethia — Technical Overview**
 
 ![](./screenshots/1.png)
+- The icon at the top right is my email profile picture, provided by clerk auth.
+
 
 ## **General Description**
 
-Alethia is a document authentication platform built by extending two foundational templates—one for the frontend and one for the backend. From these starting points, we designed a full workflow that ingests a document, analyzes it across multiple dimensions, and presents a structured evaluation of its authenticity.
+Alethia is a document authentication platform built by extending two foundational templates—one for the frontend (we added the folder ./frontend/src/app/(main)/home, the opencv feature (in the features folder) and the pipeline store (in the hooks folder)) and one for the backend (we implemented the opencv module). 
 
-The platform supports **PDF**, **JPG**, and **PNG** formats. After a document is uploaded, it is processed through a configurable **authentication pipeline**. Each pipeline stage evaluates a specific aspect of the document—metadata consistency, visual integrity, text coherence, and other forensics indicators.
+We designed a full workflow that ingests a document, analyzes it across multiple dimensions, and presents a structured evaluation of its authenticity.
+
+After a document is uploaded, it is processed through a configurable **authentication pipeline**. Each pipeline stage evaluates a specific aspect of the document—metadata consistency, visual integrity, text coherence, and other forensics indicators.
 
 ![](./screenshots/23.png)
 ![](./screenshots/2.png)
 
 Once the pipeline completes, Alethia generates:
 
+* **A radar chart** summarizing the document’s overall authenticity profile
 * **Metric scores** reflecting the integrity and authenticity of the document
 * **Detailed notes** explaining how each score was determined
-* **A radar chart** summarizing the document’s overall authenticity profile
 * **A structured summary** of reasoning and detected issues
 
 ![](./screenshots/5.png)
@@ -59,6 +63,8 @@ Once the pipeline completes, Alethia generates:
    `/backend/src/python/scripts`
 4. Each script performs a dedicated analysis task.
 5. The backend aggregates results and sends them back to the frontend for visualization.
+
+**Note:** we relied heavily on the quality of responses from AI models provided by groq APIs. An issue that we are still facing is the fact that we couldn't get these AI models to reliably output JSON responses, so most requests fail due to JSON parsing errors in the python scripts.
 
 ---
 
