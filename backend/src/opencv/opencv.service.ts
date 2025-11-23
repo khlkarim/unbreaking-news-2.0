@@ -73,39 +73,11 @@ export class OpencvService {
       const visualForensicsPath = path.resolve('./python/scripts/visualforensics.py');
 
       return plainToClass(EvaluationResponseDto, { 
-  metadata: {
-    score: 20,
-    notes: [
-      "File metadata is minimal and lacks descriptive EXIF or authoring information.",
-      "Absence of camera or device identifiers reduces confidence in the document’s origin.",
-      "Timestamps appear generic and provide no meaningful traceability."
-    ],
-  },
-  contentIntegrity: {
-    score: 40,
-    notes: [
-      "Text structure is mostly coherent but contains inconsistencies in formatting.",
-      "Detected regions show minor anomalies that may result from recompression or editing.",
-      "No strong indicators of content tampering, but certain areas warrant closer inspection."
-    ],
-  },
-  visualForensics: {
-    score: 50,
-    notes: [
-      "Edges and textures appear mostly consistent, though some sections show irregular noise patterns.",
-      "Lighting distribution is generally uniform with slight deviations suggesting localized modifications.",
-      "Compression artifacts are present but within expected ranges for the file type."
-    ],
-  },
-  consistency: {
-    score: 90,
-    notes: [
-      "Style and layout differ across sections, reducing overall document uniformity.",
-      "Minor alignment issues indicate the content may have been assembled from multiple sources.",
-      "Internal references and formatting conventions are not consistently followed."
-    ],
-  },
-});
+        metadata: JSON.parse(await this.runPythonScript(metadataPath, [tempFilePath, JSON.stringify(evalReq.config)])),
+        contentIntegrity: JSON.parse(await this.runPythonScript(textextractorPath, [tempFilePath, JSON.stringify(evalReq.config)])),
+        visualForensics: JSON.parse(await this.runPythonScript(visualForensicsPath, [tempFilePath, JSON.stringify(evalReq.config)])),
+        consistency: JSON.parse(await this.runPythonScript(consistencyPath, [tempFilePath, JSON.stringify(evalReq.config)])),
+      });
 
     } finally {
       if (wroteTempFile) {
