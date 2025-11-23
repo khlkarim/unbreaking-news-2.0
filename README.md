@@ -142,6 +142,9 @@ mv .env.example .env
 cd backend 
 mv .env.example .env
 npm install
+cd python
+python -m venv venv
+./venv/Scripts/activate
 pip install -r requirements.txt
 
 cd ../frontend
