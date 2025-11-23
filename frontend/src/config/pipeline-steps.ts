@@ -35,23 +35,10 @@ export const pipelineSteps: PipelineStep[] = [
         description: "List of metadata fields to ignore during analysis (e.g., timestamps that vary automatically).",
       },
       {
-        name: "expectedAuthor",
-        displayName: "Expected Author",
-        type: "string",
-        description: "Author name to validate against, if known.",
-      },
-      {
         name: "dateRange",
         displayName: "Allowed Date Range",
         type: "array",
         description: "Expected creation/modification date range [start, end] in ISO format.",
-      },
-      {
-        name: "hashCheck",
-        displayName: "Enable Hash Verification",
-        type: "boolean",
-        default: true,
-        description: "Enable verification against known file hashes.",
       },
     ],
   },
@@ -91,58 +78,10 @@ export const pipelineSteps: PipelineStep[] = [
     ],
   },
   {
-    title: "Preprocessing",
-    icon: Settings,
-    description: "Standardize documents for analysis (OCR, binarization, deskewing, etc.)",
-    parameters: [
-      {
-        name: "resizeDimensions",
-        displayName: "Resize Dimensions",
-        type: "array",
-        description: "[width, height] to resize images for uniform processing.",
-      },
-      {
-        name: "binarizationMethod",
-        displayName: "Binarization Method",
-        type: "string",
-        default: "otsu",
-        options: ["otsu", "adaptive", "simple"], // select menu
-        description: "Thresholding algorithm used for OCR preprocessing.",
-      },
-      {
-        name: "ocrLanguage",
-        displayName: "OCR Language",
-        type: "string",
-        default: "eng",
-        description: "Language code for OCR engine.",
-      },
-      {
-        name: "deskew",
-        displayName: "Deskew Image",
-        type: "boolean",
-        default: true,
-        description: "Correct skewed images before further analysis.",
-      },
-      {
-        name: "denoise",
-        displayName: "Denoise Image",
-        type: "boolean",
-        default: true,
-        description: "Filter out image noise before analysis.",
-      },
-    ],
-  },
-  {
     title: "Content Integrity",
     icon: ShieldCheck,
     description: "Check textual content, fonts, formatting, and potential plagiarism.",
     parameters: [
-      {
-        name: "hashDatabase",
-        displayName: "Hash Database",
-        type: "array",
-        description: "Reference hashes for document integrity verification.",
-      },
       {
         name: "plagiarismCheck",
         displayName: "Enable Plagiarism Check",

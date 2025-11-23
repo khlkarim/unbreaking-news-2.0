@@ -45,14 +45,19 @@ export class OpencvController {
     console.log(file);
   }
 
-  @Post('evaluate')
-  @UseInterceptors(FileInterceptor('file'))
-  evaluate(
+  @Post("evaluate")
+  @UseInterceptors(FileInterceptor("file"))
+  public evaluate(
     @UploadedFile() file: Express.Multer.File,
-    @Body() body: any
-  ): Promise<EvaluationResponseDto> {
-    const evalReq = plainToClass(EvaluationRequestDto, { ...body, file});
-    console.log(evalReq.file);
-    return this.service.evaluate(evalReq);
+    @Body("config") configJson: string,
+  ) {
+    // Convert the JSON string back into an object
+    const config = JSON.parse(configJson);
+
+    console.log("Received file:", file.originalname);
+    console.log("Received config:", config);
+
+    // … call service, pipeline evaluation, etc.
+    return this.service.evaluate({ config, file });
   }
 }

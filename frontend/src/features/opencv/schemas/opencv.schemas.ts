@@ -19,7 +19,21 @@ export type TestFileRequest = z.infer<typeof testFileRequestDto>;
 export type EvaluteRequest = FormData;
 
 export const evaluateResponseDto = z.object({
-  authenticityScore: z.number(),
-  notes: z.string().array(),
+  metadata: z.object({
+    score: z.number(),
+    notes: z.string().array()
+  }),
+  contentIntegrity: z.object({
+    score: z.number(),
+    notes: z.string().array()
+  }),
+  visualForensics: z.object({
+    score: z.number(),
+    notes: z.string().array()
+  }),
+  consistency: z.object({
+    score: z.number(),
+    notes: z.string().array()
+  }),
 });
 export type EvaluateResponse = z.infer<typeof evaluateResponseDto>;

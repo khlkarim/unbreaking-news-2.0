@@ -1,11 +1,16 @@
 import sys
+import io
 import mimetypes
 import base64
 import os
 from groq import Groq
 from dotenv import load_dotenv
 
+# Ensure stdout can handle Unicode
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
 load_dotenv()
+
 
 def encode_image_to_base64(path: str) -> str:
     """Read an image file and encode it as a base64 data URL."""
@@ -24,6 +29,7 @@ def encode_image_to_base64(path: str) -> str:
     except Exception as e:
         raise IOError(f"Error reading file '{path}': {e}")
 
+
 def call_groq_model(messages, model, **kwargs):
     """Call Groq API and return response text safely."""
     client = Groq()
@@ -39,6 +45,7 @@ def call_groq_model(messages, model, **kwargs):
         return completion.choices[0].message.content
     except Exception as e:
         raise RuntimeError(f"Error calling Groq API: {e}")
+
 
 def main():
     if len(sys.argv) <= 1:
@@ -96,7 +103,9 @@ def main():
         print(f"Failed to evaluate text: {e}")
         sys.exit(1)
 
+    # Print safely in UTF-8
     print(evaluation_result)
+
 
 if __name__ == "__main__":
     main()

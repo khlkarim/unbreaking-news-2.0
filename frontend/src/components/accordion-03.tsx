@@ -15,17 +15,28 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { usePipelineStore } from "@/hooks/use-pipeline-store";
+import { opencvApi } from "@/features/opencv/api/opencv.api";
+import { Button } from "@/components/ui/button";
 
 export default function PipelineAccordion() {
-  const { config, setParam } = usePipelineStore();
+  const { file, config, setParam, setResult } = usePipelineStore();
 
-  const handleEvaluate = () => {
-    console.log("Pipeline config:", config);
+  const handleEvaluate = async () => {
+    console.log("Pipeline config:", { config, file });
+
+    if(!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("config", JSON.stringify(config));
+
+    const result = await opencvApi.evaluate(formData);
+    setResult(result);
   };
 
   return (
     <>
-      <Accordion type="single" collapsible className="max-w-4xl my-4 w-full">
+      <Accordion type="single" collapsible className="max-w-4xl w-full">
         {pipelineSteps.map((step, index) => (
           <AccordionItem
             key={index}
@@ -167,12 +178,14 @@ export default function PipelineAccordion() {
         ))}
       </Accordion>
 
-      <button
+      <Button
         onClick={handleEvaluate}
-        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        variant="default"   // primary button
+        size="lg"
+        className="w-4xl mb-12"
       >
         Evaluate
-      </button>
+      </Button>
     </>
   );
 }
